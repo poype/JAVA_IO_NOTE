@@ -1,0 +1,13 @@
+Java的IO体系采用"装饰器"的设计模式，从类的结构可以分为两个部分：
+1.数据源类
+2.装饰器类
+用输入流来举例，InputStream类是所有输入流类的祖先类。
+InputStream类的许多一级子类都是数据源类，如FileInputStream、ByteArrayInputStream等等，
+这些数据源类代表的就是各种数据的来源，比如FileInputStream代表数据来源于文件。是真正读取数据的类。
+
+另一大部分就是装饰器类，InputStream类的一级子类中有一个FilterInputStream，这个就是所有装饰器类的祖先类。
+装饰器类的作用就是对数据源类进行装饰，在数据源类的基础上提供更加强大的功能。
+例如BufferedInputStream在默认的数据源类基础上增加了缓存，使读取数据更加快速。DataInputStream可以直接将
+读到的字节转换为对应的数据类型。
+
+输出流类的体系结构与输入流类似。
