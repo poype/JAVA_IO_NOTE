@@ -28,3 +28,13 @@ public class TestFileChannel {
         writeChannel.close();
     }
 }
+
+/*
+ 对Buffer的一些理解。
+ Buffer有两种模式——读模式和写模式。
+ 读模式是指数据读入到Buffer中，典型的就是调用channel的read方法将数据读入到Buffer中。
+ 写模式是指从Buffer中取数据，例如调用channel的write方法，或者调用Buffer的get方法等等。
+ 刚构建好一个Buffer之后，它的默认模式就是读模式。这也很容易理解，毕竟一个空的Buffer没什么用处。
+ 调用Buffer的flip()方法将这个Buffer从读模式切换的写模式。
+ 调用Buffer的clear()或compact()方法，将一个Buffer从写模式切换到读模式。
+ */
