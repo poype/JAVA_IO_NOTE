@@ -6,9 +6,10 @@ import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.concurrent.TimeUnit;
 
 public class Server {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         SocketAddress bindAddress = new InetSocketAddress("localhost",9999);
         serverSocketChannel.bind(bindAddress);
@@ -27,7 +28,7 @@ public class Server {
                 System.out.println();
                 recvBuffer.clear(); //一定要调用
             }
-            int bytesWrite = socketChannel.write(sendBuffer);
+            socketChannel.write(sendBuffer);
             sendBuffer.rewind(); //此处必须调用rewind，发送的时候是从buffer的position位置开始。
             socketChannel.close();
         }
