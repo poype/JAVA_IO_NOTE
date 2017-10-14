@@ -28,6 +28,7 @@ public class Server {
                 System.out.println();
                 recvBuffer.clear(); //一定要调用
             }
+            TimeUnit.MILLISECONDS.sleep(1000); //为了增加服务器发送延迟，观察客户端变化
             socketChannel.write(sendBuffer);
             sendBuffer.rewind(); //此处必须调用rewind，发送的时候是从buffer的position位置开始。
             socketChannel.close();
