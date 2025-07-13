@@ -18,3 +18,15 @@ Reactor强调通过事件驱动实现对多个连接的统一管理和响应。
 从 Reactor 线程组：每个从 Reactor 处理分配到的连接的 IO 事件，业务逻辑由独立线程池处理。
 典型案例：Netty 框架的线程模型，通过主从 Reactor 分离连接建立和 IO 处理，提升并发性能。
 
+
+
+Netty:
+SimpleChannelInboundHandler 默认会释放接收到的消息，并阻止消息继续传递到后续的 SimpleChannelInboundHandler。
+所以如果pipeline中有多个SimpleChannelInboundHandler，只有第一个SimpleChannelInboundHandler可以读取到消息。
+
+如果需要多个处理器依次处理同一消息，不要使用 SimpleChannelInboundHandler，改用 ChannelInboundHandlerAdapter 并手动传递消息
+ctx.fireChannelRead(msg); // 手动将消息传递给下一个处理器
+
+SimpleChannelInboundHandler	    自动释放消息，阻止传递到后续同类型处理器
+ChannelInboundHandlerAdapter	需要手动调用 ctx.fireChannelRead(msg) 传递消息
+
