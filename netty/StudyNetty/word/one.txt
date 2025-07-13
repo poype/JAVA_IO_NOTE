@@ -30,3 +30,7 @@ ctx.fireChannelRead(msg); // 手动将消息传递给下一个处理器
 SimpleChannelInboundHandler	    自动释放消息，阻止传递到后续同类型处理器
 ChannelInboundHandlerAdapter	需要手动调用 ctx.fireChannelRead(msg) 传递消息
 
+
+Netty的主要组件有Channel、EventLoop、ChannelFuture、ChannelHandler、ChannelPipeline等。
+Netty中的IO操作都是异步的，所有IO操作会简单返回一个ChannelFuture。调用者并不能立刻获得结果，而是通过Future-Listener机制，通过通知机制获得IO操作结果。
+
